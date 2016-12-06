@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   fillit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 12:58:12 by kboucaud          #+#    #+#             */
-/*   Updated: 2016/12/05 13:00:42 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/12/06 13:26:28 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/12/06 13:27:08 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include "fillit.h"
 
-#define BUFF_SIZE 12500
-
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdio.h>
-
-int		ft_charcheck(char *str);
-int		ft_valid_tetri(char *str);
-int		ft_check(const char *path);
-
-#endif
+int		main(int argc, char **argv)
+{
+	if (argc != 2)
+		return (0);
+	printf("%d\n", ft_check(argv[1]));
+	return (0);
+}
