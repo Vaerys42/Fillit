@@ -45,11 +45,7 @@ int		ft_charcheck(char *str)
 			j++;
 		}
 		printf("\n");
-		if (str[i] != '\n' || j != 4)
-			return (0);
-		if (str[i] != '\0' && str[i] != '\n')
-			return (0);
-		if (str[i] == '\n' && (str[i - 2] == '.' || str[i - 2] == '#'))
+		if (str[i] == '\n' && j == 4)
 			i++;
 		else
 			return (0);
@@ -66,4 +62,29 @@ int			ft_valid_tetri(char *str)
 	if (str != NULL)
 		return (1);
 	return (0);
+}
+
+int		ft_chartabcheck(char **tetri)
+{
+	int		i;
+	int		j;
+	int		k;
+
+	j = 0;
+	while (tetri[j] != '\0')
+	{
+		i = 0;
+		k = 0;
+		while (tetri[j][i] == '.' || tetri[j][i] == '#')
+		{
+			i++;
+			k++;
+		}
+		if (tetri[j][i] == '\n' && k == 4)
+			i++;
+		else
+			return (0);
+		j++;
+	}
+	return (1);
 }
