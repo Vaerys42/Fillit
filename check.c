@@ -12,11 +12,19 @@
 
 #include "fillit.h"
 
-int		ft_check(const char *path)
+int			ft_check(const char *path)
 {
 	int		fd;
 	char	*file;
+	int		i;
+	int		j;
+	int		k;
+	char 	**tetri;
 
+	i = 0;
+	j = 0;
+	k = 0;
+	tetri = NULL;
 	if ((file = (char*)malloc(sizeof(char) * BUFF_SIZE)) == NULL)
 		return (0);
 	fd = open(path, O_RDONLY);
@@ -24,47 +32,61 @@ int		ft_check(const char *path)
 		return (0);
 	if ((read(fd, file, BUFF_SIZE) == -1))
 		return (0);
-	if (ft_charcheck(file) == 0)
+	while (file[i] != '\0')
+	{
+		tetri[j][k] = file[i];
+		k++;
+		if (file[i] == '\n' && file[i - 1] == '\n')
+		{
+			tetri[j][k] = '\0';
+			j++;
+			i++;
+			k = 0;
+		}
+		i++;
+	}
+	if (ft_chartabcheck(tetri) == 0)
 		return (0);
 	return (1);
 }
 
-int		ft_charcheck(char *str)
+int			valid_tetri(char **tetri)
 {
-	int		i;
 	int		j;
+	int		i;
+	int		k;
+	int		l;
 
-	i = 0;
-	while (str[i] != '\0')
+	j = 0;
+	while (tetri[j] != '\0')
 	{
-		j = 0;
-		while (str[i] == '.' || str[i] == '#')
+		k = 0;
+		i = 0;
+		l = 0;
+		while (tetri[j][i] != '\0')
 		{
-			printf("%c", str[i]);
+			if (tetri[j][i] == '#')
+			{
+				if (tetri[j][i - 1] == '#' && i >= 1)
+					l++;
+				if (tetri[j][i + 1] == '#')
+					l++;
+				if (tetri[j][i - 5] == '#' && i >= 5)
+					l++;
+				if (tetri[j][i + 5] == '#' && i <= 16)
+					l++;
+				k++;
+			}
 			i++;
-			j++;
 		}
-		printf("\n");
-		if (str[i] == '\n' && j == 4)
-			i++;
-		else
+		if (k != 4 || (l != 6 && l != 8))
 			return (0);
+		j++;
 	}
-	if (i == 0)
-		return (-1);
-	if (ft_valid_tetri(str) == 1)
-		return (1);
-	return (0);
+	return (1);
 }
 
-int			ft_valid_tetri(char *str)
-{
-	if (str != NULL)
-		return (1);
-	return (0);
-}
-
-int		ft_chartabcheck(char **tetri)
+int			ft_chartabcheck(char **tetri)
 {
 	int		i;
 	int		j;
@@ -86,5 +108,7 @@ int		ft_chartabcheck(char **tetri)
 			return (0);
 		j++;
 	}
-	return (1);
+	if (valid_tetri(tetri))
+		return (1);
+	return (0);
 }

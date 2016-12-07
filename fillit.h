@@ -13,15 +13,15 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
-#define BUFF_SIZE 12500
+# define BUFF_SIZE 12500
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdio.h>
 
-int		ft_charcheck(char *str);
-int		ft_valid_tetri(char *str);
+int		ft_chartabcheck(char **tetri);
 int		ft_check(const char *path);
+int		valid_tetri(char **tetri);
 
 #endif
