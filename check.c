@@ -40,13 +40,14 @@ int			ft_check(const char *path)
 		{
 			tetri[j][k] = '\0';
 			j++;
-			i++;
 			k = 0;
 		}
 		i++;
 	}
-	if (ft_chartabcheck(tetri) == 0)
-		return (0);
+	tetri[j][k] = '\0';
+	file[j + 1] = '\0';
+	//if (ft_chartabcheck(tetri) == 0)
+		//return (0);
 	return (1);
 }
 
