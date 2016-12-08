@@ -13,7 +13,7 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
-# define BUFF_SIZE 12500
+# define BUFF_SIZE 64
 
 # include <stdlib.h>
 # include <unistd.h>

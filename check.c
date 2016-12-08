@@ -24,8 +24,9 @@ int			ft_check(const char *path)
 	i = 0;
 	j = 0;
 	k = 0;
-	tetri = NULL;
-	if ((file = (char*)malloc(sizeof(char) * BUFF_SIZE)) == NULL)
+	if (!(tetri = (char**)malloc(sizeof(char*) * 4)))
+		return (0);
+	if (!(file = (char*)malloc(sizeof(char) * BUFF_SIZE)))
 		return (0);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
