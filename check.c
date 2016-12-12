@@ -114,3 +114,16 @@ int			ft_chartabcheck(char **tetri)
 		return (1);
 	return (0);
 }
+
+int			main()
+{
+	char 		**tetriminos;
+
+	tetriminos = (char**)malloc(sizeof(char*) * 4);
+	tetriminos[0] = ft_strdup("....\n....\n....\n####\n");
+	tetriminos[1] = ft_strdup("....\n##..\n.##.\n....\n");
+	tetriminos[2] = ft_strdup("#.#.\n#.#.\n....\n....\n");
+	tetriminos[3] = 0;
+	printf("%d\n", ft_chartabcheck(tetriminos));
+	return (0);	
+}
