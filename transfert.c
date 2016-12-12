@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-char	**toletters(char **tetri)
+char	**to_letters(char **tetri)
 {
 	int		j;
 	int		i;
@@ -35,20 +35,22 @@ char	**toletters(char **tetri)
 	return (tetri);
 }
 
-char	**to_opti(char **tetri)
+char	**to_opti(char **s)
 {
 	int		i;
 
 	i = 0;
-	while (tetri[i] != '\0')
+	while (s[i] != '\0')
 	{
-		while (tetri[i][0] == '.' && tetri[i][5] == '.' && tetri[i][10] == '.' && tetri[i][15] == '.')
-			tetri[i] = ft_decal_left(tetri[i]);
-		/*while (tetri[i][0] == '.' && tetri[i][1] == '.' && tetri[i][2] == '.' && tetri[i][3] == '.')
-			tetri[i] = ft_decal_top(tetri[i]);*/
+		while (s[i][0] == '.' && s[i][5] == '.' \
+			&& s[i][10] == '.' && s[i][15] == '.')
+			s[i] = ft_decal_left(s[i]);
+		while (s[i][0] == '.' && s[i][1] == '.' \
+			&& s[i][2] == '.' && s[i][3] == '.')
+			s[i] = ft_decal_top(s[i]);
 		i++;
 	}
-	return (tetri);
+	return (s);
 }
 
 char	*ft_decal_top(char *tetri)
@@ -85,14 +87,16 @@ char	*ft_decal_left(char *tetri)
 	return (tetri);
 }
 
-int			main(void)
+int		main(void)
 {
 	char	**str;
 
 	str = (char**)malloc(sizeof(char*) * 3);
-	str[0] = ft_strdup("....\n.##.\n..##\n....\n");
-	str[1] = ft_strdup("...#\n...#\n...#\n...#\n");
+	str[0] = ft_strdup("....\n....\n..##\n..##\n");
+	str[1] = ft_strdup("....\n..#.\n..##\n...#\n");
+	str[2] = 0;
 	str = to_opti(str);
+	str = to_letters(str);
 	printf("%s\n", str[0]);
 	printf("%s\n", str[1]);
 	return (0);
