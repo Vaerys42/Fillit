@@ -23,5 +23,7 @@
 int		ft_chartabcheck(char **tetri);
 int		ft_check(const char *path);
 int		valid_tetri(char **tetri);
+char	*ft_decal_top(char *tetri);
+char	*ft_decal_left(char *tetri);
 
 #endif

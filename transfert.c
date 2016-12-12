@@ -34,3 +34,63 @@ char	**toletters(char **tetri)
 	}
 	return (tetri);
 }
+
+char	**to_opti(char **tetri)
+{
+	int		i;
+
+	i = 0;
+	while (tetri[i] != '\0')
+	{
+		while (tetri[i][0] == '.' && tetri[i][5] == '.' && tetri[i][10] == '.' && tetri[i][15] == '.')
+			tetri[i] = ft_decal_left(tetri[i]);
+		while (tetri[i][0] == '.' && tetri[i][1] == '.' && tetri[i][2] == '.' && tetri[i][3] == '.')
+			tetri[i] = ft_decal_top(tetri[i]);
+		i++;
+	}
+	return (tetri);
+}
+
+char	*ft_decal_top(char *tetri)
+{
+	int		i;
+
+	i = 0;
+	while (tetri[i] != '\0')
+	{
+		if (tetri[i] == '#')
+		{
+			tetri[i - 5] = '#';
+			tetri[i] = '.';
+		}
+		i++;
+	}
+	return (tetri);
+}
+
+char	*ft_decal_left(char *tetri)
+{
+	int		i;
+
+	i = 0;
+	while (tetri[i] != '\0')
+	{
+		if (tetri[i] == '#' && i >= 1)
+		{
+			tetri[i - 1] = '#';
+			tetri[i] = '.';
+		}
+		i++;
+	}
+	return (tetri);
+}
+
+int			main(void)
+{
+	char	*str;
+
+	str = (char*)malloc(sizeof(char) * 22);
+	str = "....\n####\n....\n....\n";
+	printf("%s\n", ft_decal_top(str));
+	return (0);
+}
