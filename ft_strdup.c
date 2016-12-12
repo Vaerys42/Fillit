@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 12:58:12 by kboucaud          #+#    #+#             */
-/*   Updated: 2016/12/05 13:00:42 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/11/04 16:38:05 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/11/09 14:34:09 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILLIT_H
-# define FILLIT_H
+#include <unistd.h>
+#include <stdlib.h>
 
-# define BUFF_SIZE 64
+char	*ft_strdup(const char *src)
+{
+	char	*new;
+	int		len;
+	int		i;
 
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <stdio.h>
-
-int		ft_chartabcheck(char **tetri);
-int		ft_check(const char *path);
-int		valid_tetri(char **tetri);
-char	*ft_decal_top(char *tetri);
-char	*ft_decal_left(char *tetri);
-char	*ft_strdup(const char *src);
-
-#endif
+	i = 0;
+	len = 0;
+	while (src[len] != '\0')
+		len++;
+	new = (char*)malloc(sizeof(char) * (len + 1));
+	if (new == NULL)
+	{
+		write(2, "ENOMEM", 6);
+		return (NULL);
+	}
+	while (src[i] != '\0')
+	{
+		new[i] = src[i];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
+}

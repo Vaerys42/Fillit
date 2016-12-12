@@ -44,8 +44,8 @@ char	**to_opti(char **tetri)
 	{
 		while (tetri[i][0] == '.' && tetri[i][5] == '.' && tetri[i][10] == '.' && tetri[i][15] == '.')
 			tetri[i] = ft_decal_left(tetri[i]);
-		while (tetri[i][0] == '.' && tetri[i][1] == '.' && tetri[i][2] == '.' && tetri[i][3] == '.')
-			tetri[i] = ft_decal_top(tetri[i]);
+		/*while (tetri[i][0] == '.' && tetri[i][1] == '.' && tetri[i][2] == '.' && tetri[i][3] == '.')
+			tetri[i] = ft_decal_top(tetri[i]);*/
 		i++;
 	}
 	return (tetri);
@@ -58,7 +58,7 @@ char	*ft_decal_top(char *tetri)
 	i = 0;
 	while (tetri[i] != '\0')
 	{
-		if (tetri[i] == '#')
+		if (tetri[i] == '#' && i >= 5)
 		{
 			tetri[i - 5] = '#';
 			tetri[i] = '.';
@@ -87,10 +87,13 @@ char	*ft_decal_left(char *tetri)
 
 int			main(void)
 {
-	char	*str;
+	char	**str;
 
-	str = (char*)malloc(sizeof(char) * 22);
-	str = "....\n####\n....\n....\n";
-	printf("%s\n", ft_decal_top(str));
+	str = (char**)malloc(sizeof(char*) * 3);
+	str[0] = ft_strdup("....\n.##.\n..##\n....\n");
+	str[1] = ft_strdup("...#\n...#\n...#\n...#\n");
+	str = to_opti(str);
+	printf("%s\n", str[0]);
+	printf("%s\n", str[1]);
 	return (0);
 }
