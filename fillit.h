@@ -13,7 +13,7 @@
 #ifndef FILLIT_H
 # define FILLIT_H
 
-# define BUFF_SIZE 64
+# define BUFF_SIZE 12500
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -26,5 +26,7 @@ int		valid_tetri(char **tetri);
 char	*ft_decal_top(char *tetri);
 char	*ft_decal_left(char *tetri);
 char	*ft_strdup(const char *src);
+char	*ft_strndup(char *str, int size, int start);
+char 	**ft_to_tab(char *file);
 
 #endif

@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_better.c                                        :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kboucaud <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/13 12:26:50 by kboucaud          #+#    #+#             */
-/*   Updated: 2016/12/13 12:26:52 by kboucaud         ###   ########.fr       */
+/*   Created: 2016/12/13 16:25:29 by kboucaud          #+#    #+#             */
+/*   Updated: 2016/12/13 16:25:33 by kboucaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char		*ft_size(char *tab1, char *tab2)
+char	*ft_strndup(char *str, int size, int start)
 {
-	int		larg1;
-	int		larg2;
+	char	*new;
+	int		i;
 
-	larg1 = 0;
-	larg2 = 0;
-	while (tab1[long1] != '\n')
-		long1++;
-	while (tab2[long2] != '\n')
-		long2++;
-	if (long1 > long2)
-		return (tab2)
-	return (tab1);
+	i = 0;
+	new = (char*)malloc(sizeof(char) * (size + 1));
+	if (new == NULL)
+		return (NULL);
+	while (i < size)
+	{
+		new[i] = str[start + i];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
 }

@@ -16,16 +16,8 @@ int			ft_check(const char *path)
 {
 	int		fd;
 	char	*file;
-	int		i;
-	int		j;
-	int		k;
 	char 	**tetri;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	if (!(tetri = (char**)malloc(sizeof(char*) * 4)))
-		return (0);
 	if (!(file = (char*)malloc(sizeof(char) * BUFF_SIZE)))
 		return (0);
 	fd = open(path, O_RDONLY);
@@ -33,23 +25,34 @@ int			ft_check(const char *path)
 		return (0);
 	if ((read(fd, file, BUFF_SIZE) == -1))
 		return (0);
-	while (file[i] != '\0')
-	{
-		tetri[j][k] = file[i];
-		k++;
-		if (file[i] == '\n' && file[i - 1] == '\n')
-		{
-			tetri[j][k] = '\0';
-			j++;
-			k = 0;
-		}
-		i++;
-	}
-	tetri[j][k] = '\0';
-	file[j + 1] = '\0';
-	//if (ft_chartabcheck(tetri) == 0)
+	tetri = ft_to_tab(file);
+	//if (ft_tab_check(tetri) == 0)
 		//return (0);
 	return (1);
+}
+
+char 		**ft_to_tab(char *file)
+{
+	int		i;
+	int		j;
+	int		size;
+	char	**tetri;
+
+	i = 0;
+	j = 0;
+	tetri = (char**)malloc(sizeof(char*) * 27);
+	while (file[i] != '\0' || file[i] != EOF)
+	{
+		size = i;
+		while (file[size] != '\n' && file[size - 1] != '\n')
+			size++;
+		tetri[j] = ft_strndup(file, size, i);
+		while (file[i] != '\n' && file[i - 1] != '\n')
+			i++;
+		i++;
+		j++;
+	}
+	return (tetri);
 }
 
 int			valid_tetri(char **tetri)
@@ -88,7 +91,7 @@ int			valid_tetri(char **tetri)
 	return (1);
 }
 
-int			ft_chartabcheck(char **tetri)
+int			ft_tab_check(char **tetri)
 {
 	int		i;
 	int		j;
@@ -113,17 +116,4 @@ int			ft_chartabcheck(char **tetri)
 	if (valid_tetri(tetri))
 		return (1);
 	return (0);
-}
-
-int			main()
-{
-	char 		**tetriminos;
-
-	tetriminos = (char**)malloc(sizeof(char*) * 4);
-	tetriminos[0] = ft_strdup("....\n....\n....\n####\n");
-	tetriminos[1] = ft_strdup("....\n##..\n.##.\n....\n");
-	tetriminos[2] = ft_strdup("#.#.\n#.#.\n....\n....\n");
-	tetriminos[3] = 0;
-	printf("%d\n", ft_chartabcheck(tetriminos));
-	return (0);	
 }
