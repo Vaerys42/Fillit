@@ -16,18 +16,21 @@ int			ft_check(const char *path)
 {
 	int		fd;
 	char	*file;
+	int		i;
 	char 	**tetri;
 
-	if (!(file = (char*)malloc(sizeof(char) * BUFF_SIZE)))
+	i = 0;
+	if (!(file = (char*)malloc(sizeof(char) * 85)))
 		return (0);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (0);
-	if ((read(fd, file, BUFF_SIZE) == -1))
+	if ((read(fd, file, 84) == -1))
 		return (0);
 	tetri = ft_to_tab(file);
 	//if (ft_tab_check(tetri) == 0)
 		//return (0);
+	printf("%s\n", tetri[3]);
 	return (1);
 }
 
@@ -41,13 +44,15 @@ char 		**ft_to_tab(char *file)
 	i = 0;
 	j = 0;
 	tetri = (char**)malloc(sizeof(char*) * 27);
-	while (file[i] != '\0' || file[i] != EOF)
+	while ((file[i] != '\0' || file[i] != EOF) && i < 12500)
 	{
 		size = i;
-		while (file[size] != '\n' && file[size - 1] != '\n')
+		while (file[size] != '\n' && file[size - 1] != '\n' && file[size] != '\0')
+		{
 			size++;
+		}
 		tetri[j] = ft_strndup(file, size, i);
-		while (file[i] != '\n' && file[i - 1] != '\n')
+		while (file[i] != '\n' && file[i - 1] != '\n' && file[i] != '\0')
 			i++;
 		i++;
 		j++;
