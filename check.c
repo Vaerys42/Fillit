@@ -20,12 +20,12 @@ int			ft_check(const char *path)
 	char 	**tetri;
 
 	i = 0;
-	if (!(file = (char*)malloc(sizeof(char) * 85)))
+	if (!(file = (char*)malloc(sizeof(char) * 125000)))
 		return (0);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (0);
-	if ((read(fd, file, 84) == -1))
+	if ((read(fd, file, 124999) == -1))
 		return (0);
 	tetri = ft_to_tab(file);
 	//if (ft_tab_check(tetri) == 0)
