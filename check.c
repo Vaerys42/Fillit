@@ -40,22 +40,24 @@ char 		**ft_to_tab(char *file)
 	int		j;
 	int		size;
 	char	**tetri;
+	int		start;
 
 	i = 0;
 	j = 0;
+	start = 0;
 	tetri = (char**)malloc(sizeof(char*) * 27);
 	while ((file[i] != '\0' || file[i] != EOF) && i < 12500)
 	{
-		size = i;
-		while (file[size] != '\n' && file[size - 1] != '\n' && file[size] != '\0')
+		if (file[i] == '\n' && file[i - 1] == '\n')
 		{
-			size++;
-		}
-		tetri[j] = ft_strndup(file, size, i);
-		while (file[i] != '\n' && file[i - 1] != '\n' && file[i] != '\0')
+			tetri[j] = ft_strndup(file, size, start);
+			size = 0;
+			j++;
 			i++;
+			start = i;
+		}
+		size++;
 		i++;
-		j++;
 	}
 	return (tetri);
 }
