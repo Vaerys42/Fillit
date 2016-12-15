@@ -20,6 +20,7 @@ char		**ft_check(const char *path)
 	char 	**tetri;
 
 	i = 0;
+	tetri = (char**)malloc(sizeof(char*) * 27);
 	if (!(file = (char*)malloc(sizeof(char) * 125000)))
 		return (NULL);
 	fd = open(path, O_RDONLY);
@@ -31,11 +32,6 @@ char		**ft_check(const char *path)
 	free(file);
 	if (ft_tab_check(tetri) == 0)
 		return (NULL);
-	while (tetri[i] != 0)
-	{
-		printf("%s\n", tetri[i]);
-		i++;
-	}
 	return (tetri);
 }
 
