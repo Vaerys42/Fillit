@@ -20,7 +20,7 @@ char	**to_letters(char **tetri)
 
 	j = 0;
 	letter = 65;
-	while (tetri[j] != '\0')
+	while (tetri[j] != 0)
 	{
 		i = 0;
 		while (tetri[j][i] != '\0')
@@ -40,7 +40,7 @@ char	**to_opti(char **s)
 	int		i;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i] != 0)
 	{
 		while (s[i][0] == '.' && s[i][5] == '.' \
 			&& s[i][10] == '.' && s[i][15] == '.')
@@ -85,19 +85,4 @@ char	*ft_decal_left(char *tetri)
 		i++;
 	}
 	return (tetri);
-}
-
-int		main(void)
-{
-	char	**str;
-
-	str = (char**)malloc(sizeof(char*) * 3);
-	str[0] = ft_strdup("....\n....\n..##\n..##\n");
-	str[1] = ft_strdup("....\n..#.\n..##\n...#\n");
-	str[2] = 0;
-	str = to_opti(str);
-	str = to_letters(str);
-	printf("%s\n", str[0]);
-	printf("%s\n", str[1]);
-	return (0);
 }

@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-int			ft_check(const char *path)
+char		**ft_check(const char *path)
 {
 	int		fd;
 	char	*file;
@@ -21,17 +21,22 @@ int			ft_check(const char *path)
 
 	i = 0;
 	if (!(file = (char*)malloc(sizeof(char) * 125000)))
-		return (0);
+		return (NULL);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		return (NULL);
 	if ((read(fd, file, 124999) == -1))
-		return (0);
+		return (NULL);
 	tetri = ft_to_tab(file);
-	//if (ft_tab_check(tetri) == 0)
-		//return (0);
-	printf("%s\n", tetri[3]);
-	return (1);
+	free(file);
+	if (ft_tab_check(tetri) == 0)
+		return (NULL);
+	while (tetri[i] != 0)
+	{
+		printf("%s\n", tetri[i]);
+		i++;
+	}
+	return (tetri);
 }
 
 char 		**ft_to_tab(char *file)
@@ -58,6 +63,13 @@ char 		**ft_to_tab(char *file)
 		}
 		size++;
 		i++;
+	}
+	tetri[j] = ft_strndup(file, size, start);
+	j++;
+	while (j <= 26)
+	{
+		tetri[j] = 0;
+		j++;
 	}
 	return (tetri);
 }
