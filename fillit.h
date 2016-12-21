@@ -30,5 +30,6 @@ char	*ft_strndup(char *str, int size, int start);
 char 	**ft_to_tab(char *file);
 char	**to_opti(char **s);
 char	**to_letters(char **tetri);
+int		ft_check_char(char *file);
 
 #endif

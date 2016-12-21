@@ -18,8 +18,10 @@ char		**ft_check(const char *path)
 	char	*file;
 	int		i;
 	char 	**tetri;
+	int		test;
 
 	i = 0;
+	test = 0;
 	tetri = (char**)malloc(sizeof(char*) * 27);
 	if (!(file = (char*)malloc(sizeof(char) * 125000)))
 		return (NULL);
@@ -28,11 +30,29 @@ char		**ft_check(const char *path)
 		return (NULL);
 	if ((read(fd, file, 124999) == -1))
 		return (NULL);
+	test = ft_check_char(file);
+	if (test == 0)
+		return (NULL);
+	write (1, "", 0);
 	tetri = ft_to_tab(file);
 	free(file);
 	if (ft_tab_check(tetri) == 0)
 		return (NULL);
 	return (tetri);
+}
+
+int			ft_check_char(char *file)
+{
+	int		i;
+
+	i = 0;
+	while (file[i] != '\0')
+	{
+		if (file[i] != '.' && file[i] != '#' && file[i] != '\n' && file[i] != '\0')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 char 		**ft_to_tab(char *file)
