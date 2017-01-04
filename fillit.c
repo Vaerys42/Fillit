@@ -24,7 +24,7 @@ int		main(int argc, char **argv)
 	tetri = ft_check(argv[1]);
 	if (tetri == NULL)
 	{
-		write (1, "Erreur\n", 7);
+		write(1, "Erreur\n", 7);
 		return (0);
 	}
 	tetri = to_opti(tetri);

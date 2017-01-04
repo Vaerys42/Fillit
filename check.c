@@ -17,23 +17,23 @@ char		**ft_check(const char *path)
 	int		fd;
 	char	*file;
 	int		i;
-	char 	**tetri;
+	char	**tetri;
 	int		test;
 
 	i = 0;
 	test = 0;
 	tetri = (char**)malloc(sizeof(char*) * 27);
-	if (!(file = (char*)malloc(sizeof(char) * 125000)))
+	if (!(file = (char*)malloc(sizeof(char) * 12500)))
 		return (NULL);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	if ((read(fd, file, 124999) == -1))
+	if ((read(fd, file, 12499) == -1))
 		return (NULL);
 	test = ft_check_char(file);
 	if (test == 0)
 		return (NULL);
-	write (1, "", 0);
+	write(1, "", 0);
 	tetri = ft_to_tab(file);
 	free(file);
 	if (ft_tab_check(tetri) == 0)
@@ -48,14 +48,14 @@ int			ft_check_char(char *file)
 	i = 0;
 	while (file[i] != '\0')
 	{
-		if (file[i] != '.' && file[i] != '#' && file[i] != '\n' && file[i] != '\0')
+		if (file[i] != '.' && file[i] != '#' && file[i] != '\n' && file[i] != 0)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-char 		**ft_to_tab(char *file)
+char		**ft_to_tab(char *file)
 {
 	int		i;
 	int		j;
@@ -90,6 +90,22 @@ char 		**ft_to_tab(char *file)
 	return (tetri);
 }
 
+int			check_diese(char **tetri, int i, int j)
+{
+	int		l;
+
+	l = 0;
+	if (tetri[j][i - 1] == '#' && i >= 1)
+		l++;
+	if (tetri[j][i + 1] == '#')
+		l++;
+	if (tetri[j][i - 5] == '#' && i >= 5)
+		l++;
+	if (tetri[j][i + 5] == '#' && i <= 16)
+		l++;
+	return (l);
+}
+
 int			valid_tetri(char **tetri)
 {
 	int		j;
@@ -107,14 +123,7 @@ int			valid_tetri(char **tetri)
 		{
 			if (tetri[j][i] == '#')
 			{
-				if (tetri[j][i - 1] == '#' && i >= 1)
-					l++;
-				if (tetri[j][i + 1] == '#')
-					l++;
-				if (tetri[j][i - 5] == '#' && i >= 5)
-					l++;
-				if (tetri[j][i + 5] == '#' && i <= 16)
-					l++;
+				l = l + check_diese(tetri, i, j);
 				k++;
 			}
 			i++;
