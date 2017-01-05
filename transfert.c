@@ -12,6 +12,22 @@
 
 #include "fillit.h"
 
+int		ft_check_char(char *file)
+{
+	int		i;
+
+	i = 0;
+	while (file[i] != '\0')
+	{
+		if (file[i] != '.' && file[i] != '#' && file[i] != '\n' && file[i] != 0)
+			return (0);
+		i++;
+	}
+	if (file[i - 1] != '\n' || i > 545)
+		return (0);
+	return (1);
+}
+
 char	**to_letters(char **tetri)
 {
 	int		j;

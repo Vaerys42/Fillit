@@ -23,12 +23,12 @@ char		**ft_check(const char *path)
 	i = 0;
 	test = 0;
 	tetri = (char**)malloc(sizeof(char*) * 27);
-	if (!(file = (char*)malloc(sizeof(char) * 12500)))
+	if (!(file = (char*)malloc(sizeof(char) * 1000)))
 		return (NULL);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
 		return (NULL);
-	if ((read(fd, file, 12499) == -1))
+	if ((read(fd, file, 999) == -1))
 		return (NULL);
 	test = ft_check_char(file);
 	if (test == 0)
@@ -39,20 +39,6 @@ char		**ft_check(const char *path)
 	if (ft_tab_check(tetri) == 0)
 		return (NULL);
 	return (tetri);
-}
-
-int			ft_check_char(char *file)
-{
-	int		i;
-
-	i = 0;
-	while (file[i] != '\0')
-	{
-		if (file[i] != '.' && file[i] != '#' && file[i] != '\n' && file[i] != 0)
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 char		**ft_to_tab(char *file)
@@ -66,16 +52,15 @@ char		**ft_to_tab(char *file)
 	i = 0;
 	j = 0;
 	start = 0;
-	tetri = (char**)malloc(sizeof(char*) * 27);
+	if (!(tetri = (char**)malloc(sizeof(char*) * 27)))
+		return (NULL);
 	while ((file[i] != '\0' || file[i] != EOF) && i < 12500)
 	{
 		if (file[i] == '\n' && file[i - 1] == '\n')
 		{
-			tetri[j] = ft_strndup(file, size, start);
+			tetri[j++] = ft_strndup(file, size, start);
 			size = 0;
-			j++;
-			i++;
-			start = i;
+			start = ++i;
 		}
 		size++;
 		i++;
@@ -83,10 +68,7 @@ char		**ft_to_tab(char *file)
 	tetri[j] = ft_strndup(file, size, start);
 	j++;
 	while (j <= 26)
-	{
-		tetri[j] = 0;
-		j++;
-	}
+		tetri[j++] = 0;
 	return (tetri);
 }
 
